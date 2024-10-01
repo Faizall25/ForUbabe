@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy girlfriend Day</title>
+    <link rel="stylesheet" href="Style3.css" />
+    <style>
+      /* Styling the plate button */
+      .music-btn {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        width: 70px;
+        height: 70px;
+        background-color: #ffce00;
+        border-radius: 50%;
+        border: 5px solid #ffce00;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 30px;
+      }
+
+      /* Play/Pause icon styling */
+      .music-btn.playing::before {
+        content: '⏸'; /* Pause icon when music is playing */
+      }
+
+      .music-btn.paused::before {
+        content: '▶️'; /* Play icon when music is paused */
+      }
+
+      /* Hidden audio player */
+      audio {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="envelope">
+      <div class="back"></div>
+      <div class="letter">
+        <div class="heart"></div>
+        <div class="text">
+          <p>
+            I want to say <br />
+            a lot of things babe but, <br />
+            I can't express them so I made <br />
+            this for you
+          </p>
+          <h3>Happy girlfriend Day!!!</h3>
+        </div>
+      </div>
+      <div class="front"></div>
+      <div class="top"></div>
+      <div class="shadow"></div>
+      <div class="text1">
+        <h2>Hey! Listen I Have Something For You</h2>
+      </div>
+    </div>
+
+    <!-- Hidden audio player with autoplay enabled -->
+    <audio id="background-music" loop autoplay>
+      <source src="girl in red - we fell in love in october (Lyrics).mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+
+    <!-- Music button styled as a plate -->
+    <div class="music-btn paused" id="music-control" onclick="toggleMusic()"></div>
+
+    <script>
+      // Function to play or pause music and change icon
+      function toggleMusic() {
+        var audio = document.getElementById('background-music');
+        var musicBtn = document.getElementById('music-control');
+
+        if (audio.paused) {
+          audio.play();
+          musicBtn.classList.remove('paused');
+          musicBtn.classList.add('playing');
+        } else {
+          audio.pause();
+          musicBtn.classList.remove('playing');
+          musicBtn.classList.add('paused');
+        }
+      }
+
+      // Ensure music plays automatically on load and button shows correct state
+      window.onload = function () {
+        var audio = document.getElementById('background-music');
+        var musicBtn = document.getElementById('music-control');
+
+        // Play the music and set the icon
+        audio
+          .play()
+          .then(function () {
+            musicBtn.classList.remove('paused');
+            musicBtn.classList.add('playing');
+          })
+          .catch(function (error) {
+            console.log('Autoplay is prevented. User interaction needed.');
+          });
+      };
+    </script>
+  </body>
+</html>
